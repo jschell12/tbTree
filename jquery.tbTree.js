@@ -22,7 +22,7 @@
         parseJson(options.layout, $ul);
         $(self).append($ul);
         $(self).find(".toggle").click(function(){
-            $(this).closest("li").find(".nav").toggle("fast");
+            $(this).closest("li").children(".nav").toggle("fast");
             if( $(this).find(".icon-plus").length){
                 $(this).find(".icon-plus").toggleClass("icon-plus icon-minus ");
                 toggled = true;
