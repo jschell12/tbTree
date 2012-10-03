@@ -8,33 +8,34 @@
             var options =  $.extend(defaults, options);
             var self = this;
 			
+			
+			
+			
 			/* public functions */
 			self.getOptions = function(){
 				return options;
 			};
 			
 			self.getDepth = function(){
-				
 				return options.level;
-				
 			};		
 			
-            init(self, options);
+  
 			
-            return this.each(function() {
+			init(self, options);
+			return this.each(function() {
                 var o = options;
             });
         }
     });
 
 	
-	/* private functions */
-	
+	/* private functions */	
     function init(self, options){
         var toggled = false;
-        var $ul = $("<ul class='level nav nav-list'></ul>");    
+        var $ul = $("<ul class='level nav nav-list'></ul>");
 		var level = 0;//first level
-        parseJson(options.treeLayout, $ul);
+        parseJson(options.treeLayout, $ul, 0);
         $(self).append($ul);
         $(self).find(".toggle").click(function(){
             $(this).closest("li").children(".nav").toggle("fast");
@@ -43,7 +44,7 @@
                 toggled = true;
             }else{
                 $(this).find(".icon-minus").toggleClass("icon-minus icon-plus ");
-                toggled = false;            
+                toggled = false;
             }
         });    
         
@@ -68,22 +69,34 @@
 			if(options.level < depth){
 				options.level = depth;
 			}
-		});		
+		});
     }
 
     
-    function parseJson(treeLayout, $ul){
+    function parseJson(treeLayout, $ul, length){
         $.each(treeLayout, function(i,d){
             var $li = $("<li class=''></li>");
-			
-		
+			length = this.children.length;// + length;
 			if(this.children.length > 0){
-				$li.append("<a class='toggle' data-childrencount='" + this.children.length + "' href='#'><i class='icon-minus '></i>" + this.label + "</a>");  				
+				$li.append("<a class='toggle' data-childrencount='" 
+					+ 
+					length 
+					+ 
+					"' href='#'><i class='icon-minus '></i>" 
+					+ 
+					this.label 
+					+ 
+					" (" + length + ")</a>");  				
+					
 				var $subUl = $("<ul class='level nav nav-list'></ul>");
-				$li.append($subUl);                         
-				parseJson(this.children, $subUl);   
-			}else{				
-				$li.append("<a class='toggle' href='#'><i class='icon-blank'></i>" + this.label + "</a>");        				
+				$li.append($subUl);
+				parseJson(this.children, $subUl, length);
+			}else{
+				$li.append("<a class='toggle' href='#'><i class='icon-blank'></i>" 
+					+ 
+					this.label 
+					+ 
+					"</a>");        				
 			}
 			
             $ul.append($li);
