@@ -1,25 +1,40 @@
 (function($){
     $.fn.extend({
-        //pass the options variable to the function
-        tbTree: function(options) { 
-            //Set the default values, use comma to separate the settings, example:
+        tbTree: function(options) {
             var defaults = {
-                layout: {},
+                treeLayout: {},
+				level: 0,
             };
             var options =  $.extend(defaults, options);
             var self = this;
+			
+			/* public functions */
+			self.getOptions = function(){
+				return options;
+			};
+			
+			self.getDepth = function(){
+				
+				return options.level;
+				
+			};		
+			
             init(self, options);
-        
+			
             return this.each(function() {
                 var o = options;
             });
         }
     });
 
+	
+	/* private functions */
+	
     function init(self, options){
         var toggled = false;
         var $ul = $("<ul class='level nav nav-list'></ul>");    
-        parseJson(options.layout, $ul);
+		var level = 0;//first level
+        parseJson(options.treeLayout, $ul);
         $(self).append($ul);
         $(self).find(".toggle").click(function(){
             $(this).closest("li").children(".nav").toggle("fast");
@@ -34,21 +49,45 @@
         
         $(self).find(".toggle").click();    
         $(self).find("li > .nav").hide();
+		
+		var level = 0;
+		$(self).find("ul").each(function() {
+			var depth = $(this).parents('ul').length;
+			if(depth == 0){
+				$(this).children()
+				.children("a")
+				.addClass("firstLevel")
+				.attr("data-level", depth);
+			}else{
+				$(this).find("a")
+				.not('.firstLevel')
+				.addClass("facetLevel")
+				.attr("data-level", depth);
+			}
+			
+			if(options.level < depth){
+				options.level = depth;
+			}
+		});		
     }
 
     
-    function parseJson(layout, $ul){
-        $.each(layout, function(i,d){
+    function parseJson(treeLayout, $ul){
+        $.each(treeLayout, function(i,d){
             var $li = $("<li class=''></li>");
-            if(this.children.length > 0){   
-                $li.append("<a class='toggle' href='#'><i class='icon-minus '></i>" + this.label + "</a>");  
-                var $subUl = $("<ul class='level nav nav-list'></ul>");
-                $li.append($subUl);                         
-                parseJson(this.children, $subUl);              
-            }else{
-                $li.append("<a class='toggle' href='#'><i class='icon-blank'></i>" + this.label + "</a>");        
-            }
+			
+		
+			if(this.children.length > 0){
+				$li.append("<a class='toggle' data-childrencount='" + this.children.length + "' href='#'><i class='icon-minus '></i>" + this.label + "</a>");  				
+				var $subUl = $("<ul class='level nav nav-list'></ul>");
+				$li.append($subUl);                         
+				parseJson(this.children, $subUl);   
+			}else{				
+				$li.append("<a class='toggle' href='#'><i class='icon-blank'></i>" + this.label + "</a>");        				
+			}
+			
             $ul.append($li);
+			var depth = $ul.children('ul').length;
         });
     }
 

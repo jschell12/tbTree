@@ -16,12 +16,12 @@
 <script>
 
 jQuery(document).ready(function(){
-    $(".tbTree").tbTree({
-        layout: [{
+    var tree = $(".tbTree").tbTree({
+        treeLayout: [{
             label: "Job Type",
             children:  [{
-                label: "New York, NY",                
-               children: [{
+				label: "New York, NY",
+				children: [{
                     label: "Location",
                     children: [{
                         label: "New York, NY",
@@ -56,6 +56,11 @@ jQuery(document).ready(function(){
             }],
         }]
     }); 
+	
+	console.log(tree.getOptions());
+	console.log(tree.getDepth());
+	
+	console.log(tree.getOptions());
 });
 
 </script>
