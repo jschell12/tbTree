@@ -17,6 +17,18 @@
 
 jQuery(document).ready(function(){
     var tree = $(".tbTree").tbTree({
+		preToggle: function(e, elem, label, level, childrenCount){
+			console.log("pre toggle");
+		},
+		postToggle: function(e, elem, label, level, childrenCount){
+			console.log("begin post toggle");
+			console.log(e);
+			console.log(elem);
+			console.log(label);
+			console.log(level);
+			console.log(childrenCount);
+			console.log("end post toggle");
+		},
         treeLayout: [{
             label: "Job Type",
             children:  [{
@@ -59,8 +71,6 @@ jQuery(document).ready(function(){
 	
 	console.log(tree.getOptions());
 	console.log(tree.getDepth());
-	
-	console.log(tree.getOptions());
 });
 
 </script>
