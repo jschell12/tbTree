@@ -101,9 +101,9 @@
             }else{
                 $li.append("<a class='toggle' href='#'><i class='icon-blank'></i>" 
                     + 
-                    this.label 
+                    this.label
                     + 
-                    "</a>");
+                    " (" + d.count + ")</a>");
                     
                 $li.children(".toggle").attr("data-children-count", length);
                 $li.children(".toggle").attr("data-label", this.label );
