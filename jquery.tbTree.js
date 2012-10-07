@@ -16,6 +16,7 @@
     $.fn.extend({
         tbTree: function(options) {
             var defaults = {
+				truncate: 15,
                 treeLayout: {},
                 preToggle: function(e){},
                 postToggle: function(e){},
@@ -85,9 +86,11 @@
             var $li = $("<li class=''></li>");    
             length = this.children.length;
             if(this.children.length > 0){
-                $li.append("<a class='toggle' href='#'><i class='icon-minus '></i>" 
-                    + 
-                    this.label 
+                $li.append("<a class='toggle'"
+					+ 
+					"title='" + this.label + "'href='#'><i class='icon-minus '></i>"
+					+
+                    trunc(this.label, _options.truncate, false)
                     + 
                     " (" + length + ")</a>");
                 
@@ -99,13 +102,15 @@
                 $li.append($subUl);
                 _parseJson(this.children, $subUl, length);
             }else{
-                $li.append("<a class='toggle' href='#'><i class='icon-blank'></i>" 
-                    + 
-                    this.label
+                $li.append("<a class='toggle'"
+					+ 
+					"title='" + this.label + "'href='#'><i class='icon-blank '></i>"
+					+
+                    trunc(this.label, _options.truncate, false)
                     + 
                     " (" + d.count + ")</a>");
                     
-                $li.children(".toggle").attr("data-children-count", length);
+                $li.children(".toggle").attr("data-children-count", d.count);
                 $li.children(".toggle").attr("data-label", this.label );
             }            
             $ul.append($li);
@@ -133,4 +138,11 @@
             }
         });
     }
+	
+	function trunc(str, n, useWordBoundary){
+		 var toLong = str.length>n,
+             s_ = toLong ? str.substr(0,n-1) : str;
+         s_ = useWordBoundary && toLong ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
+         return  toLong ? s_ + '&hellip;' : s_;
+	}
 })(jQuery);
