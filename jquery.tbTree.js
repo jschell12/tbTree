@@ -102,16 +102,29 @@
                 $li.append($subUl);
                 _parseJson(this.children, $subUl, length);
             }else{
-                $li.append("<a class='toggle'"
-					+ 
-					"title='" + this.label + "'href='#'><i class='icon-blank '></i>"
-					+
-                    trunc(this.label, _options.truncate, false)
-                    + 
-                    " (" + d.count + ")</a>");
-                    
-                $li.children(".toggle").attr("data-children-count", d.count);
-                $li.children(".toggle").attr("data-label", this.label );
+				if(d.count !== undefined){
+					$li.append("<a class='toggle'"
+						+ 
+						"title='" + this.label + "'href='#'><i class='icon-blank '></i>"
+						+
+						trunc(this.label, _options.truncate, false)
+						+ 
+						" (" + d.count + ")</a>");
+						
+					$li.children(".toggle").attr("data-children-count", d.count);
+					$li.children(".toggle").attr("data-label", this.label );
+				}else{
+					$li.append("<a class='toggle'"
+						+ 
+						"title='" + this.label + "'href='#'><i class='icon-blank '></i>"
+						+
+						trunc(this.label, _options.truncate, false)
+						+ 
+						" </a>");
+						
+					$li.children(".toggle").attr("data-children-count", 0);
+					$li.children(".toggle").attr("data-label", this.label );
+				}
             }            
             $ul.append($li);
         });
