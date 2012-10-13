@@ -96,13 +96,14 @@
                 
                 $li.children(".toggle").attr("data-children-count", length);
                 $li.children(".toggle").attr("data-label", this.label );
+                $li.children(".toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
                 
                 
                 var $subUl = $("<ul class='level nav nav-list'></ul>");
                 $li.append($subUl);
                 _parseJson(this.children, $subUl, length);
             }else{
-				if(d.count !== undefined){
+               	if(d.count !== undefined){
 					$li.append("<a class='toggle'"
 						+ 
 						"title='" + this.label + "'href='#'><i class='icon-blank '></i>"
@@ -113,6 +114,7 @@
 						
 					$li.children(".toggle").attr("data-children-count", d.count);
 					$li.children(".toggle").attr("data-label", this.label );
+					$li.children(".toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
 				}else{
 					$li.append("<a class='toggle'"
 						+ 
@@ -124,6 +126,7 @@
 						
 					$li.children(".toggle").attr("data-children-count", 0);
 					$li.children(".toggle").attr("data-label", this.label );
+					$li.children(".toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
 				}
             }            
             $ul.append($li);
