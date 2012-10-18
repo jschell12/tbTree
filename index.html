@@ -12,6 +12,7 @@
 
 jQuery(document).ready(function(){
     var tree = $(".tbTree").tbTree({
+		sortable: true,
 		preToggle: function(e, elem, label, level, childrenCount){
 			console.log("pre toggle");
 		},

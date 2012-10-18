@@ -20,6 +20,7 @@
                 treeLayout: {},
                 preToggle: function(e){},
                 postToggle: function(e){},
+				sortable: true,
             };
             _options =  $.extend(defaults, options);
             _self = this;
@@ -48,10 +49,12 @@
         $(_self).find("li > .nav").hide();
         _isFirstRun = false;
 		
-		//apply drag and drop sorting
-		$( ".tbTree-connectable, .tbTree-connectable" ).sortable({
-            connectWith: ".tbTree-connectable"
-        }).disableSelection();
+		if(_options.sortable){
+			//apply drag and drop sorting
+			$( ".tbTree-connectable, .tbTree-connectable" ).sortable({
+				connectWith: ".tbTree-connectable"
+			}).disableSelection();
+		}
     }
 
     function _bindEvents(){        
