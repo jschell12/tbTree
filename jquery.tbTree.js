@@ -37,7 +37,7 @@
     /* private functions */    
     function _init(){
         _isFirstRun = true;
-        var $ul = $("<ul class='nav nav-list'></ul>");
+        var $ul = $("<ul class='tbTree-connectable nav nav-list'></ul>");
         var level = 0;//first level
         _parseJson(_options.treeLayout, $ul, 0);
         $(_self).append($ul);    
@@ -47,6 +47,11 @@
         $(_self).find(".tbTree-toggle").click();   
         $(_self).find("li > .nav").hide();
         _isFirstRun = false;
+		
+		//apply drag and drop sorting
+		$( ".tbTree-connectable, .tbTree-connectable" ).sortable({
+            connectWith: ".tbTree-connectable"
+        }).disableSelection();
     }
 
     function _bindEvents(){        
@@ -99,7 +104,7 @@
                 $li.children(".tbTree-toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
                 
                 
-                var $subUl = $("<ul class='nav nav-list'></ul>");
+                var $subUl = $("<ul class='tbTree-connectable nav nav-list'></ul>");
                 $li.append($subUl);
                 _parseJson(this.children, $subUl, length);
             }else{
