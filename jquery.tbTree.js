@@ -37,21 +37,21 @@
     /* private functions */    
     function _init(){
         _isFirstRun = true;
-        var $ul = $("<ul class='level nav nav-list'></ul>");
+        var $ul = $("<ul class='nav nav-list'></ul>");
         var level = 0;//first level
         _parseJson(_options.treeLayout, $ul, 0);
         $(_self).append($ul);    
         _calculateDepth();        
         _bindEvents();    
         
-        $(_self).find(".toggle").click();   
+        $(_self).find(".tbTree-toggle").click();   
         $(_self).find("li > .nav").hide();
         _isFirstRun = false;
     }
 
     function _bindEvents(){        
         //toggle click event
-        $(_self).find(".toggle").click(function(e){            
+        $(_self).find(".tbTree-toggle").click(function(e){            
             _handleToggle(e, this);                            
         });
     }
@@ -83,10 +83,10 @@
     
     function _parseJson(treeLayout, $ul, length){
         $.each(treeLayout, function(i,d){
-            var $li = $("<li class=''></li>");    
+            var $li = $("<li ></li>");    
             length = this.children.length;
             if(this.children.length > 0){
-                $li.append("<a class='toggle'"
+                $li.append("<a class='tbTree-toggle'"
 					+ 
 					"title='" + this.label + "'href='#'><i class='icon-minus '></i>"
 					+
@@ -94,17 +94,17 @@
                     + 
                     " (" + length + ")</a>");
                 
-                $li.children(".toggle").attr("data-children-count", length);
-                $li.children(".toggle").attr("data-label", this.label );
-                $li.children(".toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
+                $li.children(".tbTree-toggle").attr("data-children-count", length);
+                $li.children(".tbTree-toggle").attr("data-label", this.label );
+                $li.children(".tbTree-toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
                 
                 
-                var $subUl = $("<ul class='level nav nav-list'></ul>");
+                var $subUl = $("<ul class='nav nav-list'></ul>");
                 $li.append($subUl);
                 _parseJson(this.children, $subUl, length);
             }else{
                	if(d.count !== undefined){
-					$li.append("<a class='toggle'"
+					$li.append("<a class='tbTree-toggle'"
 						+ 
 						"title='" + this.label + "'href='#'><i class='icon-blank '></i>"
 						+
@@ -112,11 +112,11 @@
 						+ 
 						" (" + d.count + ")</a>");
 						
-					$li.children(".toggle").attr("data-children-count", d.count);
-					$li.children(".toggle").attr("data-label", this.label );
-					$li.children(".toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
+					$li.children(".tbTree-toggle").attr("data-children-count", d.count);
+					$li.children(".tbTree-toggle").attr("data-label", this.label );
+					$li.children(".tbTree-toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
 				}else{
-					$li.append("<a class='toggle'"
+					$li.append("<a class='tbTree-toggle'"
 						+ 
 						"title='" + this.label + "'href='#'><i class='icon-blank '></i>"
 						+
@@ -124,9 +124,9 @@
 						+ 
 						" </a>");
 						
-					$li.children(".toggle").attr("data-children-count", 0);
-					$li.children(".toggle").attr("data-label", this.label );
-					$li.children(".toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
+					$li.children(".tbTree-toggle").attr("data-children-count", 0);
+					$li.children(".tbTree-toggle").attr("data-label", this.label );
+					$li.children(".tbTree-toggle").attr("data-label-shortened", trunc(this.label, _options.truncate, false) );
 				}
             }            
             $ul.append($li);
@@ -137,17 +137,11 @@
         var level = 0;
         $(_self).find("ul").each(function() {
             var depth = $(this).parents('ul').length;
-            if(depth == 0){
-                $(this).children()
-                .children("a")
-                .addClass("firstLevel")
-                .attr("data-level", depth);
-            }else{
-                $(this).find("a")
-                .not('.firstLevel')
-                .addClass("facetLevel")
-                .attr("data-level", depth);
-            }
+           
+			$(this).children()
+			.children("a")
+			.addClass("tbTree-level-" + depth)
+			.attr("data-level", depth);          
             
             if(_depth < depth){
                 _depth = depth;
