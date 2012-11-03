@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 tbTree
 ======
 # Twitter Bootstrap Tree Navigator
