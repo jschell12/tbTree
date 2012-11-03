@@ -11,60 +11,53 @@
 <script>
 
 jQuery(document).ready(function(){
-    var tree = $(".tbTree").tbTree({
-		sortable: true,
+    var $tree = $(".tbTree").tbTree({
 		preToggle: function(e, elem, label, level, childrenCount){
 			console.log("pre toggle");
 		},
 		postToggle: function(e, elem, label, level, childrenCount){
-			console.log("begin post toggle");
-			console.log(e);
-			console.log(elem);
-			console.log(label);
-			console.log(level);
-			console.log(childrenCount);
-			console.log("end post toggle");
+			console.log("post toggle");            
 		},
-        treeLayout: [{
-            label: "Job Type",
-            children:  [{
-				label: "New York, NY",
+		treeLayout: [{
+			label: "Node 1",
+			children:  [{
+				label: "Node 1.1",
 				children: [{
-                    label: "Location",
-                    children: [{
-                        label: "New York, NY",
-                        children: [],
-                    },{
-                        label: "Norwalk, CT",
-                        children: [],
-                    }],
-                }],
-            },{
-                label: "Norwalk, CT",                
-                children: [{
-                    label: "Location",
-                    children: [{
-                        label: "New York, NY",
-                        children: [],
-                    },{
-                        label: "Norwalk, CT",
-                        children: [],
-                    }],
-                }],
-            }],
-        
-        },{
-            label: "Location",
-            children: [{
-                label: "New York, NY",
-                children: [],
-            },{
-                label: "Norwalk, CT",
-                children: [],
-            }],
-        }]
-    }); 
-	
+					label: "Node 1.1.1",
+					children: [{
+						label: "Node 1.1.1.1",
+						children: [],
+					},{
+						label: "Node 1.1.1.2",
+						children: [],
+					}],
+				}],
+			},{
+				label: "Node 1.2",                
+				children: [{
+					label: "Node 1.2.1",
+					children: [{
+						label: "Node 1.2.1.1",
+						children: [],
+					},{
+						label: "Node 1.2.1.2",
+						children: [],
+					}],
+				}],
+			}],
+		
+		},{
+			label: "Node 2",
+			children: [{
+				label: "Node 2.1",
+				children: [],
+			},{
+				label: "Node 2.2",
+				children: [],
+			}],
+		}]
+	}); 
+
 	console.log(tree.getOptions());
 	console.log(tree.getDepth());
 });

@@ -8,7 +8,7 @@ NOTE: This plugin is in early stages of development and was originally intended 
 [tbtree](https://github.com/nicholascloud/tbtree) by nicholas cloud.
 
 ## Demo
-[Here is a demo](http://jsfiddle.net/jschell12/axqTU/7/)
+[Here is a demo](http://jsfiddle.net/jschell12/axqTU/17/)
 
 ## Options
 tbTree takes the following options:
