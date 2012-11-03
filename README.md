@@ -1,6 +1,5 @@
-tbTree
+tbTree - Twitter Bootstrap Tree Navigator
 ======
-# Twitter Bootstrap Tree Navigator
 This jQuery plugin was created to provide a simple tree like navigation using Twitter Bootstrap css for styling.
 
 NOTE: This plugin is in early stages of development and was originally intended for a faceted search component to use in conjunction with the [DataTables](http://datatables.net/) plugin.
