@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 tbTree
 ======
 # Twitter Bootstrap Tree Navigator
@@ -82,3 +83,13 @@ The User Interface is built with Twitter's [Bootstrap](https://github.com/twitte
 ## Desktop browsers (tested)
 * Google Chrome
 * Microsoft Internet Explorer 6.0+
+=======
+tbTree
+======
+
+Twitter Bootstrap Tree Navigator
+
+This jQuery plugin was created to provide a simple tree like navigation using Twitter Bootstrap css for styling.
+
+Here is a <a href="http://jsfiddle.net/jschell12/axqTU/7/">demo</a>
+>>>>>>> 53dae81349bfb3ba05c67e56e68095782714fac8

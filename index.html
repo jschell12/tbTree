@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://code.jquery.com/jquery.min.js"></script>
 <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 <script src="jquery.tbTree.js"></script>
 <meta charset=utf-8 />
 <title>Twitter Bootstrap Tree Navigator</title>
@@ -10,6 +12,7 @@
 
 jQuery(document).ready(function(){
     var tree = $(".tbTree").tbTree({
+		sortable: true,
 		preToggle: function(e, elem, label, level, childrenCount){
 			console.log("pre toggle");
 		},
