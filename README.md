@@ -8,7 +8,9 @@ NOTE: This plugin is in early stages of development and was originally intended 
 [tbtree](https://github.com/nicholascloud/tbtree) by nicholas cloud.
 
 ## Demo
-[Here is a demo](http://jsfiddle.net/jschell12/wMDt6/1/)
+[Here is a demo](http://jsbin.com/vikot/2)
+
+<a class="jsbin-embed" href="http://jsbin.com/vikot/2/embed?html,js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
 
 ## Options
 tbTree takes the following options:
